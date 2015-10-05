@@ -126,7 +126,13 @@ var swaggerDocUrl;
                     swaggerUi.load();
                 }
             });
-            swaggerDocUrl = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + RED.settings.httpNodeRoot + 'http-api/swagger.json';
+            //Temp fix for cnc behind proxies
+            var editorLoc = window.location.href;
+            if(editorLoc[editorLoc.length - 1] == '/'){
+                editorLoc = editorLoc.substring(0, editorLoc.length -1);
+            }
+            swaggerDocUrl = editorLoc + RED.settings.httpNodeRoot + 'http-api/swagger.json';
+            //Will need to be removed after proxies are no longer used
             var swaggerFrame = $("<iframe/>", {
                 id:"swagger-ui-frame",
                 style:"margin: 0; padding: 0; border: none; width: 100%",
