@@ -137,6 +137,12 @@ var swaggerDocUrl;
             if(editorLoc[editorLoc.length - 1] == '/'){
                 editorLoc = editorLoc.substring(0, editorLoc.length -1);
             }
+            //Remove adminRoot if found
+            var adminRoot = '/cnc-editor';
+            if(editorLoc.indexOf(adminRoot)){
+                editorLoc = editorLoc.split(adminRoot)[0];
+            }
+            //Add nodeRoot and swagger path
             swaggerDocUrl = editorLoc + RED.settings.httpNodeRoot + 'http-api/swagger.json';
             /*
              * Will need to be removed after proxies are no longer used
